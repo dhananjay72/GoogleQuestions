@@ -1,4 +1,4 @@
-[
+const tt = [
   {
     Name: "",
     URL: "",
@@ -3893,3 +3893,5 @@
     Name: "",
   },
 ];
+
+export default tt;
