@@ -18,6 +18,12 @@ const getLocalItems = () => {
   else return new Array(tableData.length).fill(false);
 };
 
+const dp = Array(26);
+dp[12] = "orange";
+dp[4] = "green";
+dp[7] = "red";
+console.log(dp);
+
 export const TableF = () => {
   const [isSolved, setIsSolved] = useState(getLocalItems);
 
@@ -37,10 +43,18 @@ export const TableF = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Sr no</TableCell>
-              <TableCell>Question</TableCell>
-              <TableCell>Difficulty</TableCell>
-              <TableCell>Solved</TableCell>
+              <TableCell>
+                <b>Sr.no</b>
+              </TableCell>
+              <TableCell>
+                <b>Questions</b>
+              </TableCell>
+              <TableCell>
+                <b>Difficulty</b>
+              </TableCell>
+              <TableCell>
+                <b>Solved</b>
+              </TableCell>
             </TableRow>
           </TableHead>
 
@@ -51,13 +65,22 @@ export const TableF = () => {
                   style={{
                     backgroundColor: isSolved[index] ? "#32ff7e" : "",
                     color: "white",
+                    width: "20%",
                   }}
                 >
-                  <TableCell>{index}</TableCell>
+                  <TableCell>{(index + 1) / 2}</TableCell>
                   <TableCell>
-                    <a href={row.URL}>{row.Name}</a>
+                    <a href={row.URL} target="_blank" rel="noreferrer">
+                      {row.Name}
+                    </a>
                   </TableCell>
-                  <TableCell>{row.Difficulty}</TableCell>
+                  <TableCell
+                    style={{
+                      color: dp[row.Difficulty.charCodeAt(0) - 65],
+                    }}
+                  >
+                    {row.Difficulty}
+                  </TableCell>
                   <TableCell>
                     {isSolved[index] ? (
                       <Checkbox
