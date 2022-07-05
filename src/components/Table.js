@@ -53,7 +53,7 @@ export const TableF = () => {
           alignItems: "center",
         }}
       >
-        <h2> {solvedQuestions} / 212 solved </h2>
+        <h2> {solvedQuestions} / 389 solved </h2>
       </div>
       <hr />
       <TableContainer>
