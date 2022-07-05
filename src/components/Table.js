@@ -26,6 +26,7 @@ console.log(dp);
 
 export const TableF = () => {
   const [isSolved, setIsSolved] = useState(getLocalItems);
+  const [solvedQuestions, setSolvedQuestions] = useState(0);
 
   function checkHandler(index) {
     let tt = isSolved;
@@ -34,13 +35,37 @@ export const TableF = () => {
   }
 
   useEffect(() => {
+    setSolvedQuestions(isSolved.filter((value) => value === true).length);
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("questionsList", JSON.stringify(isSolved));
   }, [isSolved]);
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
+      <div
+        className="gradient-border"
+        id="box"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h2> {solvedQuestions} / 212 solved </h2>
+      </div>
+      <hr />
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table
+          sx={{
+            width: 500,
+            margin: "auto",
+            minWidth: 650,
+            boxShadow: "0 0 2px 2px #9E9E9E",
+          }}
+          aria-label="simple table"
+        >
           <TableHead>
             <TableRow>
               <TableCell>
@@ -87,6 +112,9 @@ export const TableF = () => {
                         defaultChecked
                         onChange={() => {
                           let tt = [...isSolved];
+                          if (!tt[index])
+                            setSolvedQuestions(solvedQuestions + 1);
+                          else setSolvedQuestions(solvedQuestions - 1);
                           tt[index] = !tt[index];
                           setIsSolved(tt);
                         }}
@@ -95,6 +123,9 @@ export const TableF = () => {
                       <Checkbox
                         onChange={() => {
                           let tt = [...isSolved];
+                          if (!tt[index])
+                            setSolvedQuestions(solvedQuestions + 1);
+                          else setSolvedQuestions(solvedQuestions - 1);
                           tt[index] = !tt[index];
                           setIsSolved(tt);
                         }}
